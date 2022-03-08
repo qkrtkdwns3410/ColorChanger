@@ -5,12 +5,23 @@
     android:id="@+id/relative_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#0F9D58"
+    android:background="#32CD32"
     tools:context=".MainActivity"
     >
     
-    <FrameLayout
+    <Button
+        android:id="@+id/initBtn"
+        android:layout_margin="0dp"
+        android:padding="0dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="초기화"
+        
+        />
+    
+    <LinearLayout
         android:id="@+id/container"
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         />

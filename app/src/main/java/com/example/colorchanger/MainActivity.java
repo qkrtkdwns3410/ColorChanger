@@ -1,35 +1,36 @@
 package com.example.colorchanger;
 
-import static androidx.fragment.app.FragmentStatePagerAdapter.*;
+import java.util.logging.LogManager;
 
-import java.util.ArrayList;
-
+import com.example.colorchanger.listener.OnSwipeTouchListener;
 import com.orhanobut.logger.Logger;
 
+import android.app.Activity;
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.Point;
+import android.os.Build;
+import android.view.Display;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 import android.widget.Toast;
-import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import androidx.core.view.GestureDetectorCompat;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentPagerAdapter;
-import androidx.viewpager2.widget.ViewPager2;
+import androidx.constraintlayout.motion.widget.MotionInterpolator;
 
 public class MainActivity extends AppCompatActivity {
 	  
-	  public static int R_VALUE = 0;
-	  public static int G_VALUE = 0;
-	  public static int B_VALUE = 0;
+	  public static int R_VALUE = 50;
+	  public static int G_VALUE = 205;
+	  public static int B_VALUE = 50;
 	  
-	  OnSwipeTouchListener onSwipeTouchListener;
-	  public FrameLayout container;
+	  LinearLayout container;
+	  Button button;
 	  
 	  @Override
 	  protected void onCreate(Bundle savedInstanceState) {
@@ -37,100 +38,165 @@ public class MainActivity extends AppCompatActivity {
 			setContentView(R.layout.activity_main);
 			
 			container = findViewById(R.id.container);
+			button = findViewById(R.id.initBtn);
 			
-			onSwipeTouchListener = new OnSwipeTouchListener(this, findViewById(R.id.container));
+			button.setOnClickListener(new View.OnClickListener() {
+				  @Override
+				  public void onClick(View view) {
+						container.setBackgroundColor(Color.parseColor("#32CD32"));
+						
+				  }
+			});
+			
+			container.setOnTouchListener(new OnSwipeTouchListener(MainActivity.this) {
+				  
+				  @Override
+				  public boolean onTouch(View view, MotionEvent motionEvent) {
+						Logger.d("onTouch() called with: view = [" + view + "], motionEvent = [" + motionEvent + "]");
+						
+						return super.onTouch(view, motionEvent);
+						
+				  }
+				  
+				  @Override
+				  public void onSwipeUpReverse() {
+						super.onSwipeUpReverse();
+						
+						Toast.makeText(MainActivity.this, "onSwipeUpReverse", Toast.LENGTH_SHORT).show();
+						
+						G_VALUE -= 10;
+						Logger.d("G_VALUE  " + G_VALUE);
+						container.setBackgroundColor(Color.rgb(R_VALUE, G_VALUE, B_VALUE));
+				  }
+				  
+				  @Override
+				  public void onSwipeLeftReverse() {
+						super.onSwipeLeftReverse();
+						Toast.makeText(MainActivity.this, "onSwipeLeftReverse", Toast.LENGTH_SHORT).show();
+						
+						B_VALUE -= 10;
+						Logger.d("B_VALUE  " + B_VALUE);
+						
+						container.setBackgroundColor(Color.rgb(R_VALUE, G_VALUE, B_VALUE));
+						
+				  }
+				  
+				  @Override
+				  public void onSwipeRightReverse() {
+						super.onSwipeRightReverse();
+						Toast.makeText(MainActivity.this, "onSwipeRightReverse", Toast.LENGTH_SHORT).show();
+						
+						R_VALUE -= 10;
+						Logger.d("R_VALUE  " + R_VALUE);
+						
+						container.setBackgroundColor(Color.rgb(R_VALUE, G_VALUE, B_VALUE));
+						
+				  }
+				  
+				  @Override
+				  public void onSwipeRight() {
+						super.onSwipeRight();
+						
+						Toast.makeText(MainActivity.this, "onSwipeRight", Toast.LENGTH_SHORT).show();
+						
+						R_VALUE += 10;
+						Logger.d("R_VALUE  " + R_VALUE);
+						
+						container.setBackgroundColor(Color.rgb(R_VALUE, G_VALUE, B_VALUE));
+				  }
+				  
+				  @Override
+				  public void onSwipeUp() {
+						super.onSwipeUp();
+						
+						Toast.makeText(MainActivity.this, "onSwipeUp", Toast.LENGTH_SHORT).show();
+						
+						G_VALUE += 10;
+						Logger.d("G_VALUE  " + G_VALUE);
+						
+						container.setBackgroundColor(Color.rgb(R_VALUE, G_VALUE, B_VALUE));
+						
+				  }
+				  
+				  @Override
+				  public void onSwipeLeft() {
+						super.onSwipeLeft();
+						
+						Toast.makeText(MainActivity.this, "onSwipeLeft", Toast.LENGTH_SHORT).show();
+						
+						B_VALUE += 10;
+						Logger.d("B_VALUE  " + B_VALUE);
+						
+						container.setBackgroundColor(Color.rgb(R_VALUE, G_VALUE, B_VALUE));
+						
+				  }
+				  
+			});
 	  }
 	  
-	  public static class OnSwipeTouchListener implements View.OnTouchListener {
-			private final GestureDetector gestureDetector;
-			Context context;
+	  @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
+	  public static int getScreenWidth(Activity activity) {
+			Display display = activity.getWindowManager().getDefaultDisplay();  // in Activity
+			/* getActivity().getWindowManager().getDefaultDisplay() */ // in Fragment
+			Point size = new Point();
+			display.getRealSize(size); // or getSize(size)
+			int width = size.x;
 			
-			OnSwipeTouchListener(Context ctx, View mainView) {
-				  gestureDetector = new GestureDetector(ctx, new GestureListener());
-				  mainView.setOnTouchListener(this);
-				  context = ctx;
-			}
+			return width;
+	  }
+	  
+	  @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
+	  public static int getScreenHeight(Activity activity) {
+			Display display = activity.getWindowManager().getDefaultDisplay();  // in Activity
+			/* getActivity().getWindowManager().getDefaultDisplay() */ // in Fragment
+			Point size = new Point();
+			display.getRealSize(size); // or getSize(size)
+			int height = size.y;
 			
-			@Override
-			public boolean onTouch(View v, MotionEvent event) {
-				  return gestureDetector.onTouchEvent(event);
-			}
+			return height;
+	  }
+	  
+	  public void onSwipeUpReverse() {
 			
-			public class GestureListener extends
-				GestureDetector.SimpleOnGestureListener {
-				  private static final int SWIPE_THRESHOLD = 100;
-				  private static final int SWIPE_VELOCITY_THRESHOLD = 100;
-				  
-				  @Override
-				  public boolean onDown(MotionEvent e) {
-						return true;
-				  }
-				  
-				  @Override
-				  public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
-						boolean result = false;
-						try {
-							  float diffY = e2.getY() - e1.getY();
-							  float diffX = e2.getX() - e1.getX();
-							  if (Math.abs(diffX) > Math.abs(diffY)) {
-									if (Math.abs(diffX) > SWIPE_THRESHOLD && Math.abs(velocityX) > SWIPE_VELOCITY_THRESHOLD) {
-										  if (diffX > 0) {
-												onSwipeRight();
-												
-										  } else {
-												onSwipeLeft();
-										  }
-										  
-										  result = true;
-									}
-							  } else if (Math.abs(diffY) > SWIPE_THRESHOLD && Math.abs(velocityY) > SWIPE_VELOCITY_THRESHOLD) {
-									if (diffY > 0) {
-										  onSwipeBottom();
-									} else {
-										  onSwipeTop();
-									}
-									result = true;
-							  }
-						} catch (Exception exception) {
-							  exception.printStackTrace();
-						}
-						return result;
-				  }
-			}
+	  }
+	  
+	  public void onSwipeDownReverse() {
 			
-			void onSwipeRight() {
-				  Toast.makeText(context, "Swiped Right", Toast.LENGTH_SHORT).show();
-				  container.setBackgroundColor();
-				  this.onSwipe.swipeRight();
-				  
-			}
+	  }
+	  
+	  public void onSwipeLeftReverse() {
 			
-			void onSwipeLeft() {
-				  Toast.makeText(context, "Swiped Left", Toast.LENGTH_SHORT).show();
-				  this.onSwipe.swipeLeft();
-			}
+	  }
+	  
+	  public void onSwipeRightReverse() {
 			
-			void onSwipeTop() {
-				  Toast.makeText(context, "Swiped Up", Toast.LENGTH_SHORT).show();
-				  this.onSwipe.swipeTop();
-			}
+	  }
+	  
+	  public void onSwipeRight() {
 			
-			void onSwipeBottom() {
-				  Toast.makeText(context, "Swiped Down", Toast.LENGTH_SHORT).show();
-				  this.onSwipe.swipeBottom();
-			}
+	  }
+	  
+	  public void onSwipeLeft() {
+	  }
+	  
+	  public void onSwipeUp() {
 			
-			interface onSwipeListener {
-				  void swipeRight();
-				  
-				  void swipeTop();
-				  
-				  void swipeBottom();
-				  
-				  void swipeLeft();
-			}
+	  }
+	  
+	  public void onSwipeDown() {
 			
-			onSwipeListener onSwipe;
+	  }
+	  
+	  private void onClick() {
+			
+	  }
+	  
+	  private void onDoubleClick() {
+			
+	  }
+	  
+	  private void onLongClick() {
+			
 	  }
 	  
 }
