@@ -135,10 +135,6 @@ public class OnSwipeTouchListener implements OnTouchListener {
 			
 	  }
 	  
-	  public void onSwipeDownReverse() {
-			
-	  }
-	  
 	  public void onSwipeLeftReverse() {
 			
 	  }
@@ -158,20 +154,13 @@ public class OnSwipeTouchListener implements OnTouchListener {
 			
 	  }
 	  
-	  public void onSwipeDown() {
-			
-	  }
-	  
 	  private void onClick() {
-			
 	  }
 	  
 	  private void onDoubleClick() {
-			
 	  }
 	  
 	  private void onLongClick() {
-			
 	  }
 	  
 	  @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
