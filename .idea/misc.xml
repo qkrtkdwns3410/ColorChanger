@@ -9,12 +9,16 @@
         <entry key="..\:/Users/ipeac/AndroidStudioProjects/ColorChanger/app/src/main/res/layout/fragment_page.xml" value="0.24537037037037038" />
         <entry key="..\:/Users/ipeac/AndroidStudioProjects/ColorChanger/app/src/main/res/layout/fragment_vertical.xml" value="0.36822916666666666" />
         <entry key="..\:/Users/ipeac/AndroidStudioProjects/ColorChanger/app/src/main/res/layout/item_viewpager.xml" value="0.264" />
+        <entry key="..\:/Users/letscombine/AndroidStudioProjects/ColorChanger3/app/src/main/res/layout/activity_main.xml" value="0.36512820512820515" />
+        <entry key="..\:/Users/letscombine/AndroidStudioProjects/ColorChanger3/app/src/main/res/layout/fragment_blank.xml" value="0.36512820512820515" />
+        <entry key="..\:/Users/letscombine/AndroidStudioProjects/ColorChanger3/app/src/main/res/layout/fragment_blank2.xml" value="0.36512820512820515" />
+        <entry key="..\:/Users/letscombine/AndroidStudioProjects/ColorChanger3/app/src/main/res/layout/item_viewpager.xml" value="0.36512820512820515" />
         <entry key="..\:/Users/letscombine/AndroidStudioProjects/Color_Changer/app/src/main/res/layout/activity_main.xml" value="0.19907407407407407" />
         <entry key="..\:/Users/letscombine/AndroidStudioProjects/Color_Changer/app/src/main/res/layout/activity_main_color_change.xml" value="0.264" />
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">
