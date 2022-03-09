@@ -17,6 +17,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
@@ -31,19 +32,47 @@ public class MainActivity extends AppCompatActivity {
 	  
 	  LinearLayout container;
 	  Button button;
+	  TextView r_TV;
+	  TextView g_TV;
+	  TextView b_TV;
 	  
 	  @Override
 	  protected void onCreate(Bundle savedInstanceState) {
-			super.onCreate(savedInstanceState);
-			setContentView(R.layout.activity_main);
 			
-			container = findViewById(R.id.container);
-			button = findViewById(R.id.initBtn);
+			try {
+				  super.onCreate(savedInstanceState);
+				  setContentView(R.layout.activity_main);
+				  
+				  container = findViewById(R.id.container);
+				  button = findViewById(R.id.initBtn);
+				  
+				  g_TV = findViewById(R.id.idTV_Gvalue);
+				  r_TV = findViewById(R.id.idTV_Rvalue);
+				  b_TV = findViewById(R.id.idTV_Bvalue);
+				  
+				  r_TV.setText(R_VALUE + "");
+				  r_TV.setTextColor(getResources().getColor(R.color.red));
+				  //
+				  g_TV.setText(G_VALUE + "");
+				  g_TV.setTextColor(getResources().getColor(R.color.green));
+				  //
+				  b_TV.setText(B_VALUE + "");
+				  b_TV.setTextColor(getResources().getColor(R.color.blue));
+			} catch (Exception e) {
+				  e.printStackTrace();
+			}
 			
 			button.setOnClickListener(new View.OnClickListener() {
 				  @Override
 				  public void onClick(View view) {
 						container.setBackgroundColor(Color.parseColor("#32CD32"));
+						R_VALUE = 50;
+						G_VALUE = 205;
+						B_VALUE = 50;
+						
+						r_TV.setText(R_VALUE + "");
+						g_TV.setText(G_VALUE + "");
+						b_TV.setText(B_VALUE + "");
 						
 				  }
 			});
@@ -65,6 +94,7 @@ public class MainActivity extends AppCompatActivity {
 						Toast.makeText(MainActivity.this, "onSwipeUpReverse", Toast.LENGTH_SHORT).show();
 						
 						G_VALUE -= 10;
+						g_TV.setText(G_VALUE + "");
 						Logger.d("G_VALUE  " + G_VALUE);
 						container.setBackgroundColor(Color.rgb(R_VALUE, G_VALUE, B_VALUE));
 				  }
@@ -75,6 +105,7 @@ public class MainActivity extends AppCompatActivity {
 						Toast.makeText(MainActivity.this, "onSwipeLeftReverse", Toast.LENGTH_SHORT).show();
 						
 						B_VALUE -= 10;
+						b_TV.setText(B_VALUE + "");
 						Logger.d("B_VALUE  " + B_VALUE);
 						
 						container.setBackgroundColor(Color.rgb(R_VALUE, G_VALUE, B_VALUE));
@@ -87,6 +118,7 @@ public class MainActivity extends AppCompatActivity {
 						Toast.makeText(MainActivity.this, "onSwipeRightReverse", Toast.LENGTH_SHORT).show();
 						
 						R_VALUE -= 10;
+						r_TV.setText(R_VALUE + "");
 						Logger.d("R_VALUE  " + R_VALUE);
 						
 						container.setBackgroundColor(Color.rgb(R_VALUE, G_VALUE, B_VALUE));
@@ -100,6 +132,7 @@ public class MainActivity extends AppCompatActivity {
 						Toast.makeText(MainActivity.this, "onSwipeRight", Toast.LENGTH_SHORT).show();
 						
 						R_VALUE += 10;
+						r_TV.setText(R_VALUE + "");
 						Logger.d("R_VALUE  " + R_VALUE);
 						
 						container.setBackgroundColor(Color.rgb(R_VALUE, G_VALUE, B_VALUE));
@@ -112,6 +145,7 @@ public class MainActivity extends AppCompatActivity {
 						Toast.makeText(MainActivity.this, "onSwipeUp", Toast.LENGTH_SHORT).show();
 						
 						G_VALUE += 10;
+						g_TV.setText(G_VALUE + "");
 						Logger.d("G_VALUE  " + G_VALUE);
 						
 						container.setBackgroundColor(Color.rgb(R_VALUE, G_VALUE, B_VALUE));
@@ -125,6 +159,7 @@ public class MainActivity extends AppCompatActivity {
 						Toast.makeText(MainActivity.this, "onSwipeLeft", Toast.LENGTH_SHORT).show();
 						
 						B_VALUE += 10;
+						b_TV.setText(B_VALUE + "");
 						Logger.d("B_VALUE  " + B_VALUE);
 						
 						container.setBackgroundColor(Color.rgb(R_VALUE, G_VALUE, B_VALUE));
@@ -132,28 +167,6 @@ public class MainActivity extends AppCompatActivity {
 				  }
 				  
 			});
-	  }
-	  
-	  @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
-	  public static int getScreenWidth(Activity activity) {
-			Display display = activity.getWindowManager().getDefaultDisplay();  // in Activity
-			/* getActivity().getWindowManager().getDefaultDisplay() */ // in Fragment
-			Point size = new Point();
-			display.getRealSize(size); // or getSize(size)
-			int width = size.x;
-			
-			return width;
-	  }
-	  
-	  @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
-	  public static int getScreenHeight(Activity activity) {
-			Display display = activity.getWindowManager().getDefaultDisplay();  // in Activity
-			/* getActivity().getWindowManager().getDefaultDisplay() */ // in Fragment
-			Point size = new Point();
-			display.getRealSize(size); // or getSize(size)
-			int height = size.y;
-			
-			return height;
 	  }
 	  
 	  public void onSwipeUpReverse() {

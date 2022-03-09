@@ -21,9 +21,44 @@
     
     <LinearLayout
         android:id="@+id/container"
-        android:orientation="vertical"
+        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        />
+        >
+        
+        <TextView
+            android:id="@+id/idTV_Rvalue"
+            android:layout_width="wrap_content"
+            android:textSize="40sp"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:textAlignment="center"
+            android:layout_height="wrap_content"
+            android:text="R"
+            />
+        
+        <TextView
+            android:id="@+id/idTV_Gvalue"
+            android:layout_width="wrap_content"
+            android:textSize="40sp"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:textAlignment="center"
+            android:layout_height="wrap_content"
+            android:text="G"
+            />
+        
+        <TextView
+            android:id="@+id/idTV_Bvalue"
+            android:layout_width="wrap_content"
+            android:textSize="40sp"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:textAlignment="center"
+            android:layout_height="wrap_content"
+            android:text="B"
+            />
+    
+    </LinearLayout >
 
 </RelativeLayout >

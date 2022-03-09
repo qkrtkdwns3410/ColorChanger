@@ -3,6 +3,7 @@ package com.example.colorchanger.listener;
 import java.util.MissingFormatArgumentException;
 
 import com.example.colorchanger.MainActivity;
+import com.orhanobut.logger.Logger;
 
 import android.app.Activity;
 import android.content.Context;
@@ -58,39 +59,37 @@ public class OnSwipeTouchListener implements OnTouchListener {
 			public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
 				  try {
 						int x_e1 = (int)e1.getX();
+						Logger.d("x_e1  " + x_e1);
+						
 						int y_e1 = (int)e1.getY();
 						
 						int x_e2 = (int)e2.getX();
+						Logger.d("x_e2  " + x_e2);
+						
 						int y_e2 = (int)e2.getY();
 						
 						float diffY = e2.getY() - e1.getY();
 						float diffX = e2.getX() - e1.getX();
 						
 						if (Math.abs(diffX) > Math.abs(diffY)) {
-							  if (Math.abs(diffX) > 200) {
+							  if (Math.abs(diffX) > 150) {
 									if (diffX > 0) {
 										  if (x_e1 < 590 && x_e2 > 590) {
 												onSwipeRight();
+										  } else if (x_e1 > 590 && x_e2 > 590) {
+												onSwipeLeftReverse();
 										  }
 									} else {
-										  if (x_e1 > 590 / 2 && x_e2 < 590) {
+										  if (x_e1 > 590 && x_e2 < 590) {
 												onSwipeLeft();
-										  }
-									}
-							  } else if (Math.abs(diffX) < 50) {
-									if (diffX > 0) {
-										  if (x_e1 > 590 && x_e2 > 590) {
+										  } else if (x_e1 < 590 && x_e2 < 590) {
 												onSwipeRightReverse();
 										  }
-									} else {
-										  if (x_e1 < 590 && x_e2 < 590) {
-												onSwipeLeftReverse();
-												
-										  }
 									}
+									
 							  }
 						} else {
-							  if (Math.abs(diffY) > 200) {
+							  if (Math.abs(diffY) > 150) {
 									if (diffY > 0) {
 										  if (y_e1 > 1650 && y_e2 > 1650) {
 												onSwipeUpReverse();
@@ -103,17 +102,16 @@ public class OnSwipeTouchListener implements OnTouchListener {
 												
 										  }
 									}
-							  } else {
 									if (diffY < 0) {
 										  if (y_e1 > 1650 && y_e2 > 1650) {
 												onSwipeUpReverse();
 												
 										  }
 									}
-									
 							  }
 						}
-				  } catch (Exception exception) {
+				  } catch (
+					  Exception exception) {
 						exception.printStackTrace();
 				  }
 				  return false;
@@ -129,6 +127,7 @@ public class OnSwipeTouchListener implements OnTouchListener {
 				  onDoubleClick();
 				  return super.onDoubleTap(e);
 			}
+			
 	  }
 	  
 	  public void onSwipeUpReverse() {
@@ -163,27 +162,6 @@ public class OnSwipeTouchListener implements OnTouchListener {
 	  private void onLongClick() {
 	  }
 	  
-	  @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
-	  public static int getScreenWidth(Activity activity) {
-			Display display = activity.getWindowManager().getDefaultDisplay();  // in Activity
-			/* getActivity().getWindowManager().getDefaultDisplay() */ // in Fragment
-			Point size = new Point();
-			display.getRealSize(size); // or getSize(size)
-			int width = size.x;
-			
-			return width;
-	  }
-	  
-	  @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
-	  public static int getScreenHeight(Activity activity) {
-			Display display = activity.getWindowManager().getDefaultDisplay();  // in Activity
-			/* getActivity().getWindowManager().getDefaultDisplay() */ // in Fragment
-			Point size = new Point();
-			display.getRealSize(size); // or getSize(size)
-			int height = size.y;
-			
-			return height;
-	  }
 }
 
 
