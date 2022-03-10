@@ -169,49 +169,6 @@ public class MainActivity extends AppCompatActivity {
 			});
 	  }
 	  
-	  public void onSwipeUpReverse() {
-			
-	  }
-	  
-	  public void onSwipeDownReverse() {
-			
-	  }
-	  
-	  public void onSwipeLeftReverse() {
-			
-	  }
-	  
-	  public void onSwipeRightReverse() {
-			
-	  }
-	  
-	  public void onSwipeRight() {
-			
-	  }
-	  
-	  public void onSwipeLeft() {
-	  }
-	  
-	  public void onSwipeUp() {
-			
-	  }
-	  
-	  public void onSwipeDown() {
-			
-	  }
-	  
-	  private void onClick() {
-			
-	  }
-	  
-	  private void onDoubleClick() {
-			
-	  }
-	  
-	  private void onLongClick() {
-			
-	  }
-	  
 }
 
 
